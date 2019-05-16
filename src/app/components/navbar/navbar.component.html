@@ -7,7 +7,7 @@
   <!-- Middle Divider -->
   <span *ngIf="isLoggedIn$ | async" style="margin-right: 2%">{{user.username}}</span>
   
-  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" style="width:3%">
     <mat-icon>account_box</mat-icon>
     <mat-icon>expand_more</mat-icon>
 
