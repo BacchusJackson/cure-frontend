@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="CURE-toolbar">
+
+  <span>CURE</span>
+  <button *ngIf="isLoggedIn$ | async" [routerLink]="['/new']" routerLinkActive="active" mat-button>New Entry</button>
+
+  <span class="CURE-toolbar-divider"></span>
+  <!-- Middle Divider -->
+  <span *ngIf="isLoggedIn$ | async" style="margin-right: 2%">{{user.username}}</span>
+  
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>account_box</mat-icon>
+    <mat-icon>expand_more</mat-icon>
+
+    <mat-menu #appMenu="matMenu" yPosition="below">
+      <button *ngIf="!user" mat-menu-item [routerLink]="['/login']" routerLinkActive="active" >Login</button>
+
+      <button *ngIf="!user" mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
+
+      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/profile']" routerLinkActive="active" >My Profile</button>
+
+      <button *ngIf="isLoggedIn$ | async" (click)='onLogoutClick()' mat-menu-item >Logout</button>
+    </mat-menu>
+  </button>
+
+</mat-toolbar>
