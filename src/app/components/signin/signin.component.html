@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+      <div>
+          <h1>Sign in</h1>
+          <p>With your CURE account</p>
+      </div>
+          <form>
+              <mat-form-field>
+                  <input matInput placeholder="Username" [formControl]="username" required>
+                  <mat-error *ngIf="username.invalid">{{getErrorMessage("username")}}</mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <input matInput placeholder="password" type="password" [formControl]="password" required>
+                  <mat-error *ngIf="password.invalid">{{getErrorMessage("password")}}</mat-error>
+              </mat-form-field>
+          </form>
+      
+
+      
+  </mat-card-content>
+  <mat-card-actions>
+
+      <button mat-raised-button color="primary" (click)="onSubmit()">Login</button>
+      <br>
+      <button mat-button>Register</button>
+  </mat-card-actions>
+</mat-card>
