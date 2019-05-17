@@ -24,13 +24,15 @@ import { MatNativeDateModule } from "@angular/material";
 import { SigninComponent } from './components/signin/signin.component';
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { EntryFormComponent } from './components/entry-form/entry-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    NavbarComponent
+    NavbarComponent,
+    EntryFormComponent
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,

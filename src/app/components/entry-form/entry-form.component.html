@@ -1,0 +1,49 @@
+<mat-card>
+    <mat-card-content>
+        <div>
+            <h1>New Entry</h1>
+            <p></p>
+        </div>
+        <form>
+            <mat-form-field>
+                <mat-label>Select a Category</mat-label>
+                <mat-select [(ngModel)]="selectedCategory" name="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">{{category.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-label>Select a Activity</mat-label>
+                <mat-select [(ngModel)]="selectedActivity" name="activity">
+                    <mat-option *ngFor="let activity of activities" [value]="activity.value"
+                        (click)="renderProperties()">{{activity.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="showMembers">
+                <mat-label>Members</mat-label>
+                <input matInput placeholder="Number of Members" [formControl]="members">
+                <mat-error *ngIf="members.invalid">{{ getErrorMessage("members") }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="showHours">
+                <mat-label>Hours</mat-label>
+                <input matInput placeholder="Number of Hours" [formControl]="hours">
+                <mat-error *ngIf="hours.invalid">{{ getErrorMessage("hours") }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field *ngIf="showDescription">
+                <textarea matInput style="width:100%" placeholder="Description" [formControl]="description"></textarea>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+        <br>
+        <button mat-button style="width: 90%" (click)="onClear()">Clear</button>
+    </mat-card-actions>
+</mat-card>
