@@ -26,6 +26,7 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EntryFormComponent } from './components/entry-form/entry-form.component';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
     SigninComponent,
     NavbarComponent,
     EntryFormComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,
