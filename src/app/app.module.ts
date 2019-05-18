@@ -25,6 +25,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EntryFormComponent } from './components/entry-form/entry-form.component';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { EntryFormComponent } from './components/entry-form/entry-form.component
     AppComponent,
     SigninComponent,
     NavbarComponent,
-    EntryFormComponent
+    EntryFormComponent,
+    UserRegistrationComponent
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,

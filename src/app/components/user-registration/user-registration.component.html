@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <h1>Register a New User</h1>
+      <p></p>
+    </div>
+    <form>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [formControl]="firstName">
+        <mat-error *ngIf="firstName.invalid">{{ getErrorMessage("firstName") }}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControl]="lastName">
+        <mat-error *ngIf="lastName.invalid">{{ getErrorMessage("lastName") }}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Username" [formControl]="username">
+        <mat-error *ngIf="username.invalid">{{ getErrorMessage("username") }}</mat-error>
+      </mat-form-field>
+      <br>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    <br>
+    <button mat-button style="width: 90%" (click)="onClear()">Clear</button>
+  </mat-card-actions>
+</mat-card>
