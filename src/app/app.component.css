@@ -1,16 +1,15 @@
-
-.mat-card{
-    justify-content: start;
-    width: 40%;
-    margin: auto;
-    text-align: center
+.mat-card {
+  justify-content: start;
+  width: 40%;
+  margin: auto;
+  text-align: center;
 }
 
-.mat-form-field{
-    width:90%
+.mat-form-field {
+  width: 90%;
 }
 
-.borderON{
-    border-style: solid;
-    border-width: 5px;
+.borderON {
+  border-style: solid;
+  border-width: 5px;
 }

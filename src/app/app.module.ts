@@ -21,7 +21,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material";
 import { MatTableModule } from "@angular/material";
 import { MatRadioModule } from "@angular/material/radio";
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //Components
 import { SigninComponent } from './components/signin/signin.component';
@@ -51,7 +51,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatTabsModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
-    MatTableModule, MatRadioModule
+    MatTableModule, MatRadioModule, MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
