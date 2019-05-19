@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-content>
+      <div>
+        <h1>Edit My Information</h1>
+      </div>
+      <form>
+        <mat-form-field>
+          <mat-label>first Name</mat-label>
+          <input matInput placeholder="First Name" [formControl]="firstName" required>
+          <mat-error *ngIf="firstName.invalid">{{getErrorMessage("firstName")}}</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" [formControl]="lastName" required>
+          <mat-error *ngIf="lastName.invalid">{{getErrorMessage("lastName")}}</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Display Name</mat-label>
+          <input matInput placeholder="Display Name" [formControl]="displayName" required>
+          <mat-error *ngIf="displayName.invalid">{{getErrorMessage("displayName")}}</mat-error>
+        </mat-form-field>
+        <br>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-bottom: 5%">Save</button>
+    </mat-card-actions>
+  
+  </mat-card>

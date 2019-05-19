@@ -76,12 +76,13 @@ export class EntryFormComponent implements OnInit {
     } else {
       this.snackBar.open('you forgot something...', 'dismiss', {duration: 2000});
     }
+
+    this.onClear();
   }
   onClear() {
-    this.selectedActivity = null;
-    this.selectedCategory = null;
-    this.hours.setValue(0);
-    this.members.setValue(0);
+    this.members.reset();
+    this.description.reset();
+    this.hours.reset();
   }
 
 

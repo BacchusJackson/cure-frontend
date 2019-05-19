@@ -31,6 +31,7 @@ import { EntryFormComponent } from './components/entry-form/entry-form.component
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { UserEditFormComponent } from './components/user-edit-form/user-edit-for
     EntryFormComponent,
     UserRegistrationComponent,
     UserManagementComponent,
-    UserEditFormComponent
+    UserEditFormComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,
