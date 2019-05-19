@@ -11,25 +11,25 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class UserRegistrationComponent implements OnInit {
 
-  firstName = new FormControl('', [Validators.required])
-  lastName = new FormControl('', [Validators.required ])
-  username = new FormControl('', [Validators.required])
+  firstName = new FormControl('', [Validators.required]);
+  lastName = new FormControl('', [Validators.required]);
+  username = new FormControl('', [Validators.required]);
 
   constructor(private router:Router) { }
 
   ngOnInit() {
   }
 
-  getErrorMessage(field:String):string{
+  getErrorMessage(field:string):string{
     switch(field) {
       case 'firstName':
-        return this.firstName.hasError('required') ? 'This field cannot be left blank' : ''
+        return this.firstName.hasError('required') ? 'This field cannot be left blank' : '';
       case 'lastName':
-        return this.lastName.hasError('required') ? 'This field cannot be left blank' : ''
+        return this.lastName.hasError('required') ? 'This field cannot be left blank' : '';
       case 'username': 
-        return this.username.hasError('required') ? 'this field cannot be left blank' : ''
-    }
-  }
+        return this.username.hasError('required') ? 'this field cannot be left blank' : '';
+    };
+  };
 
   onSubmit() {
 

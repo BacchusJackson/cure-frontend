@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <h1>Edit User</h1>
+    </div>
+    <form>
+      <mat-form-field>
+        <mat-label>User ID</mat-label>
+        <input matInput placeholder="User ID" [formControl]="userID" required>
+        <mat-error *ngIf="userID.invalid">{{getErrorMessage("userID")}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>first Name</mat-label>
+        <input matInput placeholder="First Name" [formControl]="firstName" required>
+        <mat-error *ngIf="firstName.invalid">{{getErrorMessage("firstName")}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControl]="lastName" required>
+        <mat-error *ngIf="lastName.invalid">{{getErrorMessage("lastName")}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>username</mat-label>
+        <input matInput placeholder="Username" [formControl]="username" required>
+        <mat-error *ngIf="username.invalid">{{getErrorMessage("username")}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Site</mat-label>
+        <mat-select [(ngModel)]="site" name="site">
+          <mat-option *ngFor="let site of sites" [value]="site.value">{{site.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>clinic</mat-label>
+        <mat-select [(ngModel)]="clinic" name="clinic">
+          <mat-option *ngFor="let clinic of clinics" [value]="clinic.value">{{clinic.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-bottom: 5%">Login</button>
+  </mat-card-actions>
+
+</mat-card>

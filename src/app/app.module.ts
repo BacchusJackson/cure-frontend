@@ -20,6 +20,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material";
 import { MatTableModule } from "@angular/material";
+import { MatRadioModule } from "@angular/material/radio";
 
 
 //Components
@@ -29,6 +30,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { EntryFormComponent } from './components/entry-form/entry-form.component';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
     NavbarComponent,
     EntryFormComponent,
     UserRegistrationComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    UserEditFormComponent
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,
@@ -46,7 +49,7 @@ import { UserManagementComponent } from './components/user-management/user-manag
     MatTabsModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
-    MatTableModule
+    MatTableModule, MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

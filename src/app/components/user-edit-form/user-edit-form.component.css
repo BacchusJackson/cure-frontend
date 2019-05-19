@@ -1,0 +1,9 @@
+.radio-group {
+  display: flex;
+  margin-top: 5%;
+}
+
+.radio-button {
+  margin-left: auto;
+  margin-right: auto;
+}
