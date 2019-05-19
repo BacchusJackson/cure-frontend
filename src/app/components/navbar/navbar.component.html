@@ -17,6 +17,7 @@
       <button *ngIf="!user" mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
 
       <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/profile']" routerLinkActive="active" >My Profile</button>
+      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/manageUsers']" routerLinkActive="active" >Manage Users</button>
       <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/newUser']" routerLinkActive="active" >Create New User</button>
       <button *ngIf="isLoggedIn$ | async" (click)='onLogoutClick()' mat-menu-item >Logout</button>
     </mat-menu>

@@ -19,6 +19,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material";
+import { MatTableModule } from "@angular/material";
+
 
 //Components
 import { SigninComponent } from './components/signin/signin.component';
@@ -43,7 +45,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
     BrowserAnimationsModule, ReactiveFormsModule,
     MatTabsModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,
-    MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule
+    MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
