@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,7 +12,7 @@ export class UserProfileComponent implements OnInit {
   lastName = new FormControl('', [Validators.required]);
   displayName = new FormControl('', [Validators.required]);
 
-  constructor() { }
+  constructor(private usersService:UsersService) { }
 
   ngOnInit() {
   }
