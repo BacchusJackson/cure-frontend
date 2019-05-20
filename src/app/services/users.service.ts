@@ -27,6 +27,18 @@ export class UsersService {
   
   }
 
+  // PUT Request
+  async updateUserInfo(updatedUserInfo: {firstName:string, lastName:string, displayName:string}) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.mainUser.token
+      })
+    }
+    console.log(this.mainUser.id);
+    return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
+  }
+
   // Load the user into the global space
   getUser(userToken: string) {
     const httpOptions = {
@@ -44,6 +56,7 @@ export class UsersService {
   this.http.get<User>(environment.apiURL + '/users/id/' + decodedToken.userID, httpOptions).toPromise()
   .then((response) => {
     this.mainUser = response;
+    this.mainUser.id = decodedToken.userID;
     this.mainUser.token = userToken;
     localStorage.setItem('token', userToken);
     this.userLoggedIn.next(true);
