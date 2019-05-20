@@ -1,26 +1,26 @@
 <mat-toolbar color="primary" class="CURE-toolbar">
 
   <span>CURE</span>
-  <button *ngIf="isLoggedIn$ | async" [routerLink]="['/entry']" routerLinkActive="active" mat-button>New Entry</button>
+  <button *ngIf="user" [routerLink]="['/entry']" routerLinkActive="active" mat-button>New Entry</button>
 
   <span class="CURE-toolbar-divider"></span>
   <!-- Middle Divider -->
-  <span *ngIf="isLoggedIn$ | async" style="margin-right: 2%">{{user.username}}</span>
+  <span *ngIf="user" style="margin-right: 2%">{{user.displayName}}</span>
   
   <button mat-icon-button [matMenuTriggerFor]="appMenu" style="width:3%">
     <mat-icon>account_box</mat-icon>
     <mat-icon>expand_more</mat-icon>
 
     <mat-menu #appMenu="matMenu" yPosition="below">
-      <button *ngIf="!user" mat-menu-item [routerLink]="['/login']" routerLinkActive="active" >Login</button>
+      <button *ngIf="!user" mat-menu-item [routerLink]="['/']" routerLinkActive="active" >Login</button>
 
       <button *ngIf="!user" mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
 
-      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/userProfile']" routerLinkActive="active" >My Profile</button>
-      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/manageUsers']" routerLinkActive="active" >Manage Users</button>
-      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/newUser']" routerLinkActive="active" >Create New User</button>
-      <button *ngIf="isLoggedIn$ | async" mat-menu-item [routerLink]="['/editUser']" routerLinkActive="active" >Edit User</button>
-      <button *ngIf="isLoggedIn$ | async" (click)='onLogoutClick()' mat-menu-item >Logout</button>
+      <button *ngIf="user" mat-menu-item [routerLink]="['/userProfile']" routerLinkActive="active" >My Profile</button>
+      <button *ngIf="user" mat-menu-item [routerLink]="['/manageUsers']" routerLinkActive="active" >Manage Users</button>
+      <button *ngIf="user" mat-menu-item [routerLink]="['/newUser']" routerLinkActive="active" >Create New User</button>
+      <button *ngIf="user" mat-menu-item [routerLink]="['/editUser']" routerLinkActive="active" >Edit User</button>
+      <button *ngIf="user" (click)='onLogoutClick()' mat-menu-item >Logout</button>
     </mat-menu>
   </button>
 

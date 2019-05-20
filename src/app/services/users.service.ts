@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { MatSnackBar } from '@angular/material';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { MatSnackBar } from '@angular/material';
 export class UsersService {
   public firstName: string;
   public mainUser: User;
+  public userLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http:HttpClient, private snackbar:MatSnackBar) { }
 
@@ -25,6 +27,7 @@ export class UsersService {
   
   }
 
+  // Load the user into the global space
   getUser(userToken: string) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,10 +40,13 @@ export class UsersService {
   // Decode the web token and get the id
   const decodedToken: DecodedToken = jwtHelper.decodeToken(userToken);
   
+  // Get request with the id
   this.http.get<User>(environment.apiURL + '/users/id/' + decodedToken.userID, httpOptions).toPromise()
   .then((response) => {
     this.mainUser = response;
     this.mainUser.token = userToken;
+    localStorage.setItem('token', userToken);
+    this.userLoggedIn.next(true);
   })
   .catch((err) => {
     console.log('UNHANDLED SERVER ERROR: ' + err)
@@ -48,6 +54,16 @@ export class UsersService {
   })
 
   };
+
+  get isLoggedIn(): Observable<boolean>{
+    return this.userLoggedIn.asObservable();
+  }
+
+  logout() {
+    this.mainUser = null;
+    this.userLoggedIn.next(false);
+    localStorage.clear();
+  }
 }
 export interface Response {
   expiresIn: number;

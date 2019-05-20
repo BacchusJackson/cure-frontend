@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { Observable, BehaviorSubject } from 'rxjs';
+import { UsersService, User } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,22 +11,35 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  user: {username:String}
-  isLoggedIn$: Observable<boolean>;
-  userLoggedIn = new BehaviorSubject<boolean>(false);
+  user: User;
 
   constructor(
     private router:Router,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private usersService:UsersService
     ) { }
 
   ngOnInit() {
-    this.user = {username: 'Test User'};
-    this.isLoggedIn$ = this.userLoggedIn;
-    this.userLoggedIn.next(true);
+
+    // When ever a log in or out event is trigger, this will change the user
+    this.usersService.userLoggedIn.subscribe(
+      (userLoggedIn) => {
+        if(userLoggedIn) {
+          this.user = this.usersService.mainUser;
+        }else {
+          this.user = null;
+        }
+      },
+      (err) => {
+        if(err) throw err;
+      }
+    );
+  }
+  
+  onLogoutClick(){
+    this.usersService.logout();
+    this.snackBar.open('See you next time!','dismiss', {duration:4000});
+    this.router.navigate(['/'])
   }
 
-  get isLoggedIn(): Observable<boolean>{
-    return this.userLoggedIn.asObservable();
-  }
 }
