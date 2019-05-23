@@ -22,6 +22,7 @@ import { MatNativeDateModule } from "@angular/material";
 import { MatTableModule } from "@angular/material";
 import { MatRadioModule } from "@angular/material/radio";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog'
 
 //Components
 import { SigninComponent } from './components/signin/signin.component';
@@ -31,7 +32,7 @@ import { EntryFormComponent } from './components/entry-form/entry-form.component
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileComponent, ChangePasswordDialog } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -43,7 +44,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     UserRegistrationComponent,
     UserManagementComponent,
     UserEditFormComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ChangePasswordDialog
+  ],
+  entryComponents: [
+    ChangePasswordDialog
   ],
   imports: [
     BrowserModule, FormsModule, AppRoutingModule, HttpClientModule,
@@ -51,7 +56,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatTabsModule, MatToolbarModule, MatMenuModule, MatIconModule,
     MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,
     MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
-    MatTableModule, MatRadioModule, MatProgressSpinnerModule
+    MatTableModule, MatRadioModule, MatProgressSpinnerModule, MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

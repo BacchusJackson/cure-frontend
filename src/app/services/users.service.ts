@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   // PUT Request
-  async updateUserInfo(updatedUserInfo: {firstName:string, lastName:string, displayName:string}) {
+  async updateUserInfo(updatedUserInfo?: {firstName:string, lastName:string, displayName:string, password?:string}, passwordOnly?:{password: string}) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -36,7 +36,13 @@ export class UsersService {
       })
     }
     console.log(this.mainUser.id);
-    return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
+    if(updatedUserInfo) {
+      console.log('changing userinfo');
+      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
+    } else if(passwordOnly) {
+      console.log('changing password');
+      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, passwordOnly, httpOptions).toPromise()
+    }
   }
 
   // Load the user into the global space

@@ -21,11 +21,10 @@
           <input matInput placeholder="Display Name" [formControl]="displayName" required>
           <mat-error *ngIf="displayName.invalid">{{getErrorMessage("displayName")}}</mat-error>
         </mat-form-field>
-        <br>
-
       </form>
     </mat-card-content> 
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-bottom: 5%">Save</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" style="margin-bottom: 2%">Save</button>
+      <button mat-button color="accent" (click)="onResetPassword()">Click here to change password</button>
     </mat-card-actions>
   </mat-card>
