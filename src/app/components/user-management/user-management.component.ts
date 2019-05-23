@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-user-management',
@@ -8,23 +9,31 @@ import {MatTableDataSource} from '@angular/material';
 })
 
 export class UserManagementComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  
   displayColumns: string[] = ['id', 'firstName', 'lastName', 'username', 'displayName', 'site', 'clinic', 'status'];
-  dataSource = new MatTableDataSource(userData);
+  dataSource: any;
+  constructor(private usersService: UsersService) { }
+  
+  ngOnInit() {
+    
+    this.usersService.getAllUsers(this.usersService.mainUser.token)
+    .then( (results) => {
+        this.dataSource = new MatTableDataSource(results);
+      } 
+    )
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  
+
 
 }
 
+
 export interface users {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -33,23 +42,3 @@ export interface users {
   clinic: string;
   status: string;
 }
-
-const userData: users[] = [
-  {id: "00001", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00002", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00003", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00004", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'Admin'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-  {id: "00005", firstName: "Bill", lastName: 'Paxton', username: 'bill.paxton', displayName: 'Bill Paxton', site: 'Langley', clinic: 'Mental Health', status: 'standard'},
-
-]

@@ -35,7 +35,7 @@ export class UsersService {
         'Authorization': 'Bearer ' + this.mainUser.token
       })
     }
-    console.log(this.mainUser.id);
+
     if(updatedUserInfo) {
       console.log('changing userinfo');
       return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
@@ -74,6 +74,16 @@ export class UsersService {
 
   };
 
+  async getAllUsers(userToken: string): Promise<User[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userToken
+      })
+    }
+
+    return await this.http.get<User[]>(environment.apiURL + '/users/', httpOptions).toPromise()
+  }
   get isLoggedIn(): Observable<boolean>{
     return this.userLoggedIn.asObservable();
   }
