@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material";
 import { FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-user-registration',

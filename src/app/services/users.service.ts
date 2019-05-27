@@ -37,10 +37,8 @@ export class UsersService {
     }
 
     if(updatedUserInfo) {
-      console.log('changing userinfo');
       return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
     } else if(passwordOnly) {
-      console.log('changing password');
       return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, passwordOnly, httpOptions).toPromise()
     }
   }

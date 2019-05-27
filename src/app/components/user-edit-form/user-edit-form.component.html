@@ -10,25 +10,25 @@
         <mat-error *ngIf="userID.invalid">{{getErrorMessage("userID")}}</mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <mat-form-field *ngIf="userLoaded">
         <mat-label>first Name</mat-label>
         <input matInput placeholder="First Name" [formControl]="firstName" required>
         <mat-error *ngIf="firstName.invalid">{{getErrorMessage("firstName")}}</mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <mat-form-field *ngIf="userLoaded">
         <mat-label>Last Name</mat-label>
         <input matInput placeholder="Last Name" [formControl]="lastName" required>
         <mat-error *ngIf="lastName.invalid">{{getErrorMessage("lastName")}}</mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <mat-form-field *ngIf="userLoaded">
         <mat-label>username</mat-label>
         <input matInput placeholder="Username" [formControl]="username" required>
         <mat-error *ngIf="username.invalid">{{getErrorMessage("username")}}</mat-error>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <mat-form-field *ngIf="userLoaded">
         <mat-label>Site</mat-label>
         <mat-select [(ngModel)]="site" name="site">
           <mat-option *ngFor="let site of sites" [value]="site.value">{{site.text}}
@@ -36,7 +36,7 @@
         </mat-select>
       </mat-form-field>
       <br>
-      <mat-form-field>
+      <mat-form-field *ngIf="userLoaded">
         <mat-label>clinic</mat-label>
         <mat-select [(ngModel)]="clinic" name="clinic">
           <mat-option *ngFor="let clinic of clinics" [value]="clinic.value">{{clinic.text}}
