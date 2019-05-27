@@ -16,6 +16,12 @@ export class AdminUsersService {
     })
   }
 
+  //Get a specific user by username
+  async getUserByUsername(username: string) {
+    console.log(username);
+    return await this.http.get<User>(environment.apiURL + '/users/username/' + username, this.standardHttpOptions).toPromise();
+  }
+
   // GET a specific user by ID
   async getUser(userID: string) {
     const httpOptions = {
@@ -32,5 +38,11 @@ export class AdminUsersService {
   async updateUserInfo(updatedUserInfo: {id: string, firstName: string, lastName: string, username: string}) {
     
     return await this.http.put<User>(environment.apiURL + '/users/' + updatedUserInfo.id, updatedUserInfo, this.standardHttpOptions).toPromise()
+  }
+
+  // POST add a new user
+  async createUser(userInfo: {firstName: string, lastName: string, username: string, password: string}) {
+
+    return await this.http.post<User>(environment.apiURL + '/users/', userInfo, this.standardHttpOptions).toPromise();
   }
 }

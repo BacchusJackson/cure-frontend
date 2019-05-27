@@ -32,3 +32,15 @@
     <button mat-button style="width: 90%" (click)="onClear()">Clear</button>
   </mat-card-actions>
 </mat-card>
+
+<!-- User Creatation Card -->
+
+<mat-card *ngIf="createdUsername">
+  <mat-card-content>
+    <h1>Temporary User Information</h1>
+    <p>Please Instruct the User to change their password Immediately!!</p>
+    <br>
+    <h2>Username: {{createdUsername}}</h2>
+    <h2>Password: {{tempPassword}}</h2>
+  </mat-card-content>
+</mat-card>
