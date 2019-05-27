@@ -3,6 +3,7 @@ import { FormControl, Validators } from "@angular/forms";
 import { UsersService } from "../../services/users.service";
 import { AdminUsersService } from "src/app/services/admin-users.service";
 import { MatSnackBar } from "@angular/material";
+import { isUndefined } from 'util';
 
 @Component({
   selector: "app-user-edit-form",
@@ -79,8 +80,27 @@ export class UserEditFormComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    // TODO: Add actual database service
-    console.log('Submitted!');
+  // TODO: Add the site and clinic
+  async onSubmit() {
+    if(this.userID.invalid || this.firstName.invalid || this.lastName.invalid || this.username.invalid) {
+      this.snackBar.open('You forgot something...', 'dismiss', {duration: 3000});
+      return false;
+    };
+
+    const userEditInfo = {
+      id: this.userID.value,
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      username: this.username.value,
+    }
+
+    let updateRequest = await this.adminUsersService.updateUserInfo(userEditInfo);
+
+    if(isUndefined(updateRequest.username)) {
+      this.snackBar.open('Something went wrong...', 'dismiss', {duration: 3000});
+    }else {
+      this.snackBar.open('Successful Update!', 'dismiss', {duration: 2000});
+    }
+
   }
 }
