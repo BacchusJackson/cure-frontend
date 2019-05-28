@@ -11,7 +11,7 @@ import { AdminUsersService } from 'src/app/services/admin-users.service';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent implements OnInit {
-
+  //TODO: Add Clinic and Site Dropdowns
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('', [Validators.required]);
   username = new FormControl('', [Validators.required]);

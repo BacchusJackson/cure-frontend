@@ -8,7 +8,7 @@
             <mat-form-field>
                 <mat-label>Select a Category</mat-label>
                 <mat-select [(ngModel)]="selectedCategory" name="category">
-                    <mat-option *ngFor="let category of categories" [value]="category.value">{{category.text}}
+                    <mat-option *ngFor="let category of categories" [value]="category" (click)="filterActivities()">{{category}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -16,12 +16,19 @@
             <mat-form-field>
                 <mat-label>Select a Activity</mat-label>
                 <mat-select [(ngModel)]="selectedActivity" name="activity">
-                    <mat-option *ngFor="let activity of activities" [value]="activity.value"
-                        (click)="renderProperties()">{{activity.text}}
+                    <mat-option *ngFor="let activity of filteredActivities" [value]="activity.name"
+                        (click)="renderProperties()">{{activity.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <br>
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input matInput placeholder="Date of Activity" [formControl]="entryDate" [matDatepicker] = "picker">
+                <mat-datepicker-toggle mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="entryDate.invalid">{{ getErrorMessage("entryDate") }}</mat-error>
+            </mat-form-field>
             <mat-form-field *ngIf="showMembers">
                 <mat-label>Members</mat-label>
                 <input matInput placeholder="Number of Members" [formControl]="members">

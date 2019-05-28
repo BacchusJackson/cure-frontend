@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material";
 import { FormControl, Validators } from "@angular/forms";
+import { DataService, Activity, Entry } from "../../services/data.service";
+import { UsersService } from 'src/app/services/users.service';
+import { isDate } from 'util';
 
-export interface Category {
-  value: string;
-  text: string;
-}
-export interface Activity {
-  value: string;
-  text: string;
-  properties: string[];
-}
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.component.html',
   styleUrls: ['./entry-form.component.css']
 })
 export class EntryFormComponent implements OnInit {
+  constructor(private snackBar:MatSnackBar, private dataService:DataService, private usersService: UsersService) { }
   selectedCategory: string;
   selectedActivity: string;
   
@@ -26,65 +21,126 @@ export class EntryFormComponent implements OnInit {
   showDescription: boolean = false;
 
   // form control bindings
-  members = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')])
-  description = new FormControl()
-  hours = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')])
+  members = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]);
+  description = new FormControl();
+  hours = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]);
+  entryDate = new FormControl('', [Validators.required])
 
-  categories: Category[] = [
-    {value: '1', text:'Apples'},
-    {value: '2', text:'Pears'},
-    {value: '3', text:'Grapefruit'},
-  ]
-  activities: Activity[] = [
-    {value: '1', text:'Apples', properties:['members']},
-    {value: '2', text:'Pears', properties:['members','description']},
-    {value: '3', text:'Grapefruit', properties:['members', 'hours', 'description']},
-  ]
+  categories: any;
+  activities: Activity[];
+  filteredActivities: Activity[];
 
-  constructor(private snackBar:MatSnackBar) { }
-
-  ngOnInit() {
-
+  async ngOnInit() {
+    // Get all of the activities from the Database
+    this.activities = await this.dataService.getActivities();
+    
+    // Filter through the activities to get the unique category names
+    this.categories = this.activities.map((item) => { return item.category })
+    // Remove Duplicates after maping (get only the category for each array item)
+    .filter((item, i, ar) => {return ar.indexOf(item) === i});
   }
-
-  // show the red error messages under the text boxes
-  getErrorMessage(field: string) {
-    if(field == 'members') {
-      return this.members.hasError('required') ? 'This field cannot be left blank' : 
-      this.members.hasError('pattern') ? 'this field must be a number' : ''
-    }else if(field == 'hours') {
-      return this.hours.hasError('required') ? 'This field cannot be left blank' : 
-      this.hours.hasError('pattern') ? 'this field must be a number' : ''
-    }
+  
+  resetFields() {
+    this.members.reset();
+    this.hours.reset();
+    this.description.reset();
   }
+  // Filter the activities based on category
+  filterActivities() {
+    this.filteredActivities = this.activities.filter((item) => item.category == this.selectedCategory)
 
+    this.resetFields()
+  }
   // show or hide the text boxes based on the properties list
   renderProperties() {
-    const filteredActivities = this.activities.filter((item) => item.value == this.selectedActivity)
-    filteredActivities[0].properties.includes('members') ? this.showMembers = true : this.showMembers = false;
-    filteredActivities[0].properties.includes('hours') ? this.showHours = true : this.showHours = false;
-    filteredActivities[0].properties.includes('description') ? this.showDescription = true : this.showDescription = false;
+    // Filter based on the selected activity to get the properties
+    let properties: any = this.activities
+    .filter((item) => item.name == this.selectedActivity)
+    .map((item) => item.properties);
+    properties = properties[0];
+
+    // If the activity has one of the properties, display it
+    properties.includes('members') ? this.showMembers = true : this.showMembers = false;
+    properties.includes('hours') ? this.showHours = true : this.showHours = false;
+    properties.includes('description') ? this.showDescription = true : this.showDescription = false;
+
+    this.resetFields();
+
+  }
+  // show the red error messages under the text boxes
+  getErrorMessage(field: string) {
+    switch(field) {
+      case 'members':
+        return this.members.hasError('required') ? 'This field cannot be left blank' : 
+        this.members.hasError('pattern') ? 'this field must be a number' : '';
+      case 'hours':
+        return this.hours.hasError('required') ? 'This field cannot be left blank' : 
+        this.hours.hasError('pattern') ? 'this field must be a number' : '';
+      case 'entryDate':
+        return this.entryDate.hasError('required') ? 'This field cannot be left blank' : '';
+    }
   }
 
-  onSubmit() {
-    // There a validation bug. If you click on and click off of a property without putting a number and switch activities.... I'll deal with it later
-    if(this.selectedCategory && this.selectedActivity && this.members.valid && this.hours.valid) {
-      console.log(this.selectedCategory);
-      console.log(this.selectedActivity);
-      this.snackBar.open('Thank you!', 'dimiss', {duration: 2000});
-      this.selectedActivity = null;
-    } else {
+  // Check if fields are visible and then check if they are validated correctly
+  validateForm(): boolean {
+
+    if(this.showDescription) {
+      if(this.description.invalid) {
+        return false
+      }
+    }
+    if(this.showHours) {
+      if(this.hours.invalid) {
+        return false
+      }
+    }
+    if(this.showMembers) {
+      if(this.description.invalid) {
+        return false
+      }
+    }
+    if(this.entryDate.invalid || isDate(this.entryDate.value) == false) {
+      return false
+    }
+    return true
+  }
+
+  async onSubmit() {
+    // Validate the form and submit
+    if(!this.validateForm()) {
+
       this.snackBar.open('you forgot something...', 'dismiss', {duration: 2000});
+
+      return false;
     }
 
-    this.onClear();
-  }
+    let selectedActivityObj = this.activities.filter((item) => item.name == this.selectedActivity)[0]
+    let entry: Entry = {
+      activityID: selectedActivityObj._id,
+      activity: selectedActivityObj.name,
+      category: selectedActivityObj.category,
+      creator: this.usersService.mainUser.username,
+      dateEntered: new Date(),
+      dateCreated: new Date(),
+      site: this.usersService.mainUser.site,
+      clinic: this.usersService.mainUser.clinic,
+      userStatus: this.usersService.mainUser.status,
+      hours: this.hours.value || null,
+      members: this.members.value || null,
+      description: this.description.value || null
+      }
+
+      const submitEntryRequest = await this.dataService.addEntry(entry);
+
+      if(submitEntryRequest) {
+        this.snackBar.open('Thank you!', 'dimiss', {duration: 2000});
+      } else {
+        this.snackBar.open('Something went wrong while attempting to submit entry..', 'dismiss', {duration: 3000})
+      }
+    }
+
   onClear() {
-    this.members.reset();
-    this.description.reset();
-    this.hours.reset();
+    this.resetFields();
   }
-
-
 
 }
