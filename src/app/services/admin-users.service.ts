@@ -18,7 +18,6 @@ export class AdminUsersService {
 
   //Get a specific user by username
   async getUserByUsername(username: string) {
-    console.log(username);
     return await this.http.get<User>(environment.apiURL + '/users/username/' + username, this.standardHttpOptions).toPromise();
   }
 

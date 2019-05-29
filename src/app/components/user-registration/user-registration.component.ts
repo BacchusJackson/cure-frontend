@@ -79,8 +79,6 @@ export class UserRegistrationComponent implements OnInit {
     // Query the newly created user to ensure it is in the database
     let createdUser = await this.adminUsersService.getUserByUsername(this.username.value);
 
-    console.log(createdUser);
-
     if(!createdUser) {
       this.snackBar.open('Something went wrong... Cannot find new user in database', 'dismiss', {duration: 3000});
       return false;
