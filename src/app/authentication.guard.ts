@@ -11,7 +11,9 @@ export class AuthenticationGuard implements CanActivate {
 
   canActivate() {
 
+    // Check for a good token and load the user into the global space
     if(this.usersService.goodToken) {
+      this.usersService.getUser(localStorage.getItem('token'));
       return true;
     } else {
       this.router.navigate(['/']);

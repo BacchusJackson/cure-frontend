@@ -20,7 +20,9 @@ export class SigninComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+    if(this.usersService.goodToken) {
+      this.usersService.getUser(localStorage.getItem('token'));
+    }
   }
 
   getErrorMessage(field: String) {

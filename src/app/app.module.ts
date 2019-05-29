@@ -33,6 +33,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserEditFormComponent } from './components/user-edit-form/user-edit-form.component';
 import { UserProfileComponent, ChangePasswordDialog } from './components/user-profile/user-profile.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { UserProfileComponent, ChangePasswordDialog } from './components/user-pr
     UserManagementComponent,
     UserEditFormComponent,
     UserProfileComponent,
-    ChangePasswordDialog
+    ChangePasswordDialog,
+    UnauthorizedComponent
   ],
   entryComponents: [
     ChangePasswordDialog

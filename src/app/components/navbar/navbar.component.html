@@ -13,9 +13,6 @@
 
     <mat-menu #appMenu="matMenu" yPosition="below">
       <button *ngIf="!user" mat-menu-item [routerLink]="['/']" routerLinkActive="active" >Login</button>
-
-      <button *ngIf="!user" mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
-
       <button *ngIf="user" mat-menu-item [routerLink]="['/userProfile']" routerLinkActive="active" >My Profile</button>
       <button *ngIf="user" mat-menu-item [routerLink]="['/manageUsers']" routerLinkActive="active" >Manage Users</button>
       <button *ngIf="user" mat-menu-item [routerLink]="['/newUser']" routerLinkActive="active" >Create New User</button>
