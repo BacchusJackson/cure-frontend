@@ -19,6 +19,7 @@ export class DataService {
 
   // GET all activities
   async getActivities() {
+    console.log(localStorage.getItem('token'));
     return await this.http.get<Activity[]>(environment.apiURL + '/activities', this.httpOptions).toPromise();
   }
 

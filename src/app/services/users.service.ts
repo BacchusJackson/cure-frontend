@@ -53,7 +53,10 @@ export class UsersService {
   };
   const jwtHelper = new JwtHelperService();
 
-  // Decode the web token and get the id
+  // Set the token to the local storage
+  localStorage.setItem('token', userToken);
+
+  // Decode the web token to get the id
   const decodedToken: DecodedToken = jwtHelper.decodeToken(userToken);
   
   // Get request with the id
@@ -62,7 +65,6 @@ export class UsersService {
     this.mainUser = response;
     this.mainUser.id = decodedToken.userID;
     this.mainUser.token = userToken;
-    localStorage.setItem('token', userToken);
     this.userLoggedIn.next(true);
   })
   .catch((err) => {
