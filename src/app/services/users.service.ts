@@ -88,6 +88,20 @@ export class UsersService {
     return this.userLoggedIn.asObservable();
   }
 
+  get goodToken(): boolean {
+    // If there is no token 
+    if(!localStorage.getItem('token')) { return false };
+
+    const jwtHelper = new JwtHelperService();
+    
+    // If the token is not expired, it's a good token
+    if(!jwtHelper.isTokenExpired(localStorage.getItem('token'))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   logout() {
     this.mainUser = null;
     this.userLoggedIn.next(false);

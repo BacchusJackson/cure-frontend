@@ -7,13 +7,16 @@ import { UserManagementComponent } from "./components/user-management/user-manag
 import { UserEditFormComponent } from "./components/user-edit-form/user-edit-form.component";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
+import { AuthenticationGuard } from "./authentication.guard";
+
 const routes: Routes = [
   {path:'', component: SigninComponent},
-  {path:'entry', component: EntryFormComponent},
-  {path: 'newUser', component: UserRegistrationComponent},
-  {path: 'manageUsers', component: UserManagementComponent},
-  {path: 'editUser', component: UserEditFormComponent},
-  {path: 'userProfile', component: UserProfileComponent}
+  {path:'entry', component: EntryFormComponent, canActivate: [AuthenticationGuard]},
+  {path: 'newUser', component: UserRegistrationComponent, canActivate: [AuthenticationGuard]},
+  {path: 'manageUsers', component: UserManagementComponent, canActivate: [AuthenticationGuard]},
+  {path: 'editUser', component: UserEditFormComponent, canActivate: [AuthenticationGuard]},
+  {path: 'userProfile', component: UserProfileComponent, canActivate: [AuthenticationGuard]},
+  {path: '**', redirectTo: 'entry'}
 ];
 
 @NgModule({
