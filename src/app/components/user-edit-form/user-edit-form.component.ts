@@ -83,7 +83,7 @@ export class UserEditFormComponent implements OnInit {
     }
   }
 
-  // TODO: Add the site and clinic
+  // TODO: fix site and clinic generation after loading id
   async onSubmit() {
     if(this.userID.invalid || this.firstName.invalid || this.lastName.invalid || this.username.invalid) {
       this.snackBar.open('You forgot something...', 'dismiss', {duration: 3000});
