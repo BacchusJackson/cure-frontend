@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import { UsersService } from 'src/app/services/users.service';
+import { AdminUsersService } from 'src/app/services/admin-users.service';
 
 @Component({
   selector: 'app-user-management',
@@ -12,22 +12,21 @@ export class UserManagementComponent implements OnInit {
   
   displayColumns: string[] = ['id', 'firstName', 'lastName', 'username', 'displayName', 'site', 'clinic', 'status'];
   dataSource: any;
-  constructor(private usersService: UsersService) { }
+  constructor(private adminUsersService: AdminUsersService) { }
   
   ngOnInit() {
     
-    this.usersService.getAllUsers(this.usersService.mainUser.token)
+    this.adminUsersService.getAllUsers()
     .then( (results) => {
+
         this.dataSource = new MatTableDataSource(results);
-      } 
+      }
     )
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
-
 
 }
 

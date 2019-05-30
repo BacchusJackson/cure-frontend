@@ -13,6 +13,13 @@ export class UsersService {
   public mainUser: User;
   public userLoggedIn = new BehaviorSubject<boolean>(false);
 
+  standardHttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer' + localStorage.getItem('token')
+    })
+  };
+
   constructor(private http:HttpClient, private snackbar:MatSnackBar) { }
 
   async signIn(userInfo: {username: string, password: string}): Promise<Response> {
@@ -29,17 +36,12 @@ export class UsersService {
 
   // PUT Request
   async updateUserInfo(updatedUserInfo?: {firstName:string, lastName:string, displayName:string, password?:string}, passwordOnly?:{password: string}) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.mainUser.token
-      })
-    }
+
 
     if(updatedUserInfo) {
-      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, httpOptions).toPromise()
+      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, updatedUserInfo, this.standardHttpOptions).toPromise()
     } else if(passwordOnly) {
-      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, passwordOnly, httpOptions).toPromise()
+      return await this.http.put<User>(environment.apiURL + '/users/' + this.mainUser.id, passwordOnly, this.standardHttpOptions).toPromise()
     }
   }
 
@@ -74,19 +76,9 @@ export class UsersService {
 
   };
 
-  async getAllUsers(userToken: string): Promise<User[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + userToken
-      })
-    }
-
-    return await this.http.get<User[]>(environment.apiURL + '/users/', httpOptions).toPromise()
-  }
   get isLoggedIn(): Observable<boolean>{
     return this.userLoggedIn.asObservable();
-  }
+  };
 
   get goodToken(): boolean {
     // If there is no token 
@@ -100,14 +92,16 @@ export class UsersService {
     } else {
       return false;
     }
-  }
+  };
 
   logout() {
     this.mainUser = null;
     this.userLoggedIn.next(false);
     localStorage.clear();
   }
-}
+};
+
+// INTERFACES 
 export interface Response {
   expiresIn: number;
   accessToken: string;
@@ -126,7 +120,7 @@ export interface User {
   status: string;
   token?: string;
 
-}
+};
 
 interface DecodedToken {
   userID: string;
