@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { UsersService } from './users.service';
-import { sanitizeScript } from '@angular/core/src/sanitization/sanitization';
-import { getSupportedInputTypes } from '@angular/cdk/platform';
 
 @Injectable({
   providedIn: 'root'
