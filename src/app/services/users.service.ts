@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
-import { Observable } from "rxjs/internal/observable";
+import { Observable } from "rxjs/internal/Observable";
 
 @Injectable({
   providedIn: 'root'
