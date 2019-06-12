@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { MatSnackBar } from '@angular/material';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
+import { Observable } from "rxjs/internal/observable";
 
 @Injectable({
   providedIn: 'root'

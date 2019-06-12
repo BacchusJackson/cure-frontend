@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
-import { Observable, BehaviorSubject } from 'rxjs';
 import { UsersService, User } from 'src/app/services/users.service';
 
 @Component({
