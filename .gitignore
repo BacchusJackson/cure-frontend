@@ -12,6 +12,9 @@
 # dependencies
 /node_modules
 
+# Environmental Variable in prod
+environment.prod.ts
+
 # profiling files
 chrome-profiler-events.json
 speed-measure-plugin.json
